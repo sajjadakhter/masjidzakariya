@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"><head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button1").click(function(){
+                alert
+                $.ajax({url: "demo_test.txt", success: function(result){
+                    $("#div1").html(result);
+                }});
+            });
+        });
+    </script>
+
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Prayer Timetable - Yearly</title>
+
+	<style>
+		body, form {font-family: Verdana, Geneva, sans-serif; font-size: 14px; color: #000000; text-align: center; margin: 0; padding: 0}
+		table, th, td {font-family: "Arial";font-size: 15px; border: 1px solid black;border-collapse: collapse;padding: 1.75px; text-align: center; color: #000000;}
+		}
+		pre {font-family: Verdana, Geneva, sans-serif, size: 10pt; margin: 0px auto; color: #000000;}
+		.header {background:#eef; border-bottom: 1px solid #ddd; padding: 7px; color: #000000;}
+
+		tr.iqama_time_header td {border:2pt solid black;padding: 1px; font-family:"Arial Black", Gadget, sans-serif; font-size: 12px;}
+		tr.iqama_time td {border:2pt solid black;padding: 1px; font-family:"Arial Black", Gadget, sans-serif; font-size: 11px;}
+		tr.iqama_time_hijri td {border:2pt solid black;padding: 1px; font-family:"Arial Black", Gadget, sans-serif; background-color: white; font-size: 11px; font-style: italic;}
+
+
+		tr.header_row td {border:1pt solid black;padding: 5px; font-size: 18px; font-family:bold,"Times New Roman", Times, serif; color: #000000;}
+		tr.header_page1 td {border:0pt solid black;padding: 5px; font-size: 16px; font-family:bold,"Times New Roman", Times, serif; color: #000000;}
+		tr.header_page2 td {border:0pt solid black;padding: 1px; font-size: 28px; font-family:bold,"Times New Roman", Times, serif; color: #000000;}
+		tr.header_page3 td {border:0pt solid black;padding: 5px; font-size: 14px; font-family:bold,"Times New Roman", Times, serif; color: #000000;}
+
+
+		body{
+			-webkit-print-color-adjust:exact;
+		}
+	</style>
+
+</head>
+
+<body>
+
+<script type="text/javascript" src="PrayTimes.js"></script>
+<script type="text/javascript" src="DSTCalculator.js"></script>
+<script type="text/javascript" src="IqamaCalculator.js"></script>
+<script type="text/javascript" src="HijriCalculator.js"></script>
+<script type="text/javascript" src="HelperFunctions.js"></script>
+<script type="text/javascript" src="Properties.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+
+<script type="text/javascript" src="My_Masjid_Info.js"></script>
+
+<div class="header" id="PageHeader">
+<form class="form" action="javascript:update();">
+	<span>Year: <input value="2015" id="year" size="4" onchange="update();" type="number" style="width: 45px;">&nbsp;</span>
+	<span>
+		Month:
+		<select id="month" size="1" style="font-size: 12px;" onchange="update()">
+			<option value="1">January</option>
+			<option value="2">February</option>
+			<option value="3">March</option>
+			<option value="4">April</option>
+			<option value="5">May</option>
+			<option value="6">June</option>
+			<option value="7">July</option>
+			<option value="8">August</option>
+			<option value="9">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+			<option value="12">December</option>
+
+		</select>
+	</span>
+
+	&nbsp;&nbsp; Adjust Hijri: <input value="0" id="hijriadjust" size="2" onchange="update();" type="text">&nbsp;
+	<input id="more" type="checkbox">Hide for Printout</input>
+	&nbsp;&nbsp;<a id= "ssi" href="javascript:downloadImage('iqama-container')">Download Image</a>
+
+</form>
+</div>
+
+<div id="timetable" align="center"><pre>
+</pre></div>
+
+<div align="center">
+	<b>Get Iqamah time on your phone, download <a href="http://masjidiapp.com/">Masjidi</a> on <a href="https://itunes.apple.com/app/id599229758"> AppStore </a> and <a href="https://play.google.com/store/apps/details?id=com.ummahsoft.masjidi"> PlayStore.</a></b>
+</div>
+
+<script type="text/javascript" src="./Customized_UI_Yearly-3.js"></script>
+<script src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js" onload="checkForDownload()"></script>
+
+
+
+</body></html>
+
