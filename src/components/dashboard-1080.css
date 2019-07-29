@@ -40,36 +40,22 @@
 }
 
 .next-salah {
-    display: inline-flex;
-    flex-horizontal-center: 1;
-    flex-direction: row;
     vertical-align: bottom;
     margin-top: 35px;
 
 }
 
-.next-salah .continer {
-
-}
-
 .next-salah .contine .title {
-    font-size: 50px;
-    display: inline-flex;
-    color: #eeeeff;
-    font-size: 35px;
-    margin-right: 10px;
+
 }
 
 .next-salah .time {
-    letter-spacing: normal;
-    font-size: 35px;
-    display: flex;
-    flex-direction: row;
+
 }
 
 .next-salah div {
     color: greenyellow;
-    font-size: 40px;
+    font-size: 35px;
 
 }
 
@@ -141,7 +127,7 @@
 
 .today {
     margin-top: 100px;
-    font-size: 0.50in;
+    font-size: 0.70in;
 
 }
 
@@ -152,14 +138,22 @@
 
 .today .row {
     border-bottom: gray solid 4px;
+    vertical-align: center;
 }
 
 .today .time {
     color: greenyellow;
-    font-size: 0.9in;
-    margin-top: 30px;
+    font-size: 1in;
 }
 
+.info time {
+    font-size: 60%;
+    color: gray;
+}
+
+.today .current {
+    color: greenyellow
+}
 
 @keyframes App-logo-spin {
     from {

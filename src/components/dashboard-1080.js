@@ -1,153 +1,68 @@
-import React, {useEffect, useState} from 'react';
-import {Col, Row, Container} from 'react-bootstrap';
-import useClock from 'react-use-clock-hook';
-import FitText from '@kennethormandy/react-fittext'
-import Moment from 'react-moment';
+import React from 'react';
+import {Col, Container, Row} from 'react-bootstrap';
 import {useSalahTimes} from './useSalahTimes'
 import moment from 'moment'
 import './dashboard-1080.css';
-import SalahTimes from "./salahtimes";
-import HijriDate from "./HijriDate";
+import SalahTimesVertical from "./SalahTimesVertical"
+import CurrentTimeDisplay from "./CurrentTimeDisplay";
+import NextSalahDisplay from "./nextSalahDisplay";
+import {useNextSalah} from "./useNextSalah";
+import CurrentDateDisplay from "./CurrentDateDisplay";
+import useClock from "./useClock"
 
+function Dashboard1920() {
 
-function Dashboard1080() {
+    //const {time, raw: currentTime} = useClock("HH:mm:ss");
 
-
-    const [nextsalah, setNextsalah] = useState('');
-    const [nextsalahName, setNextsalahName] = useState('Fajar');
-    const [salahMsg, setsalahMsg] = useState('');
-    const {time, raw} = useClock("HH:mm:ss");
+    const [datetime, hour, min, second] = useClock();
 
     const today = moment();
     const tomorrow = moment().add(1, 'days');
 
-    const [fajar, zuhar, asar, magrib, isha, shuruq, hijri] = useSalahTimes(today.date(), today.month() + 1, today.year(), 4230);
-    const [tfajar, tzuhar, tasar, tmagrib, tisha, tshuruq, thijri] = useSalahTimes(tomorrow.date(), tomorrow.month() + 1, tomorrow.year(), 4230);
-
-    const updateTimetype = (salahtime) => {
-        if (today < salahtime.start) {
-            setsalahMsg('starts');
-            setNextsalah(salahtime.start);
-        } else if (today < salahtime.iqamah) {
-            setsalahMsg('iqamah');
-            setNextsalah(salahtime.iqamah);
-        }
-    };
-
-    useEffect(() => {
-        if (today < fajar.start || today < shuruq) {
-            setNextsalahName('Fajar');
-            updateTimetype(fajar)
-        } else if (today < zuhar.iqamah) {
-            setNextsalahName('Zuhar');
-            updateTimetype(zuhar);
-        } else if (today < asar.iqamah) {
-            setNextsalahName('Asar');
-            updateTimetype(asar);
-        } else if (today < magrib.iqamah) {
-            setNextsalahName('Magrib');
-            updateTimetype(magrib);
-        } else if (today < isha.iqamah) {
-            setNextsalahName('Isha');
-            updateTimetype(isha);
-        } else {
-            setNextsalahName('Fajar');
-            updateTimetype(tfajar);
-        }
-
-    }, [fajar, zuhar, asar, magrib, isha, shuruq, raw]);
-
-    const iqamFormat = "h:mm";
+    const [fajar, zuhar, asar, magrib, isha, shuruq, hijri, salahTimes, masjidInfo] = useSalahTimes(today.date(), today.month() + 1, today.year(), 4230);
+    const [tfajar, tzuhar, tasar, tmagrib, tisha, tshuruq, thijri, tsalahTimes] = useSalahTimes(tomorrow.date(), tomorrow.month() + 1, tomorrow.year(), 4230);
+    const [nextsalahName, nextsalah, salahMsg, updatedSalahTimes] = useNextSalah(fajar, shuruq, zuhar, asar, magrib, isha, tfajar, today, datetime, salahTimes);
 
     return (
-
         <div className="App">
             <Container fluid>
-                <Row className={'masjid-name'}>
-                    <Col sm="6">Masjid Zakariya</Col>
-                    <Col sm="6"> مسجد ذکریا</Col>
+                <Row>
+                    <Col className={'masjid-name'}>
+                        {masjidInfo.name} {masjidInfo.shortname}
+                    </Col>
                 </Row>
-                <Row className={'toprow'} sm={3}>
+                <Row className={'toprow'}>
                     <Col sm={1}/>
                     <Col sm={4}>
                         <Col sm={1}/>
-                        <Col sm={10} className={'next-salah'}>
-                            <div className={'continer'}>
-                                <div className={'title'}> {nextsalahName} {salahMsg} in</div>
-                                <div
-                                    className={'time'}>  {moment.duration(moment(nextsalah).diff(moment())).format(", h [hours], m [minutes]", {trim: true})}</div>
-                            </div>
+                        <Col sm={10}>
 
+                            <NextSalahDisplay salahName={nextsalahName} salahMsg={salahMsg} salahtime={nextsalah}/>
                         </Col>
                         <Col sm={1}/>
                     </Col>
-                    <Col sm={1}/>
-                    <Col sm={4} className={'timecontainer'}>
-                        <div>
-                            <div className={'time'}>
-                                <div>{raw.format(" h:mm ")}</div>
-                                <div className={'ampm'}>{raw.format(" ss a")}</div>
-                            </div>
-                        </div>
-                        <div className={'date'}>
-                            <div className={'shamsi'}>
-                                {raw.format("dddd, MMMM Do")}
-                            </div>
-                            <div className={'date-hijri'}>
-                                <HijriDate day={hijri.day} month={hijri.month} year={hijri.year}/>
-                            </div>
-                        </div>
+                    <Col sm={6} className={'timecontainer'}>
+                        <CurrentTimeDisplay tick={second}/>
+                        <CurrentDateDisplay time={second} hijri={hijri}/>
                     </Col>
                     <Col sm={1}/>
                 </Row>
 
-                <SalahTimes
-                    className={'middle-row'}
-                    title={'Tomorrow'}
-                    fajar={tfajar}
-                    zuhar={tzuhar}
-                    asar={tasar}
-                    magrib={tmagrib}
-                    isha={tisha}
-                    shuruq={tshuruq}/>
+                <Row style={{height: '100px'}}></Row>
 
+                <SalahTimesVertical
+                    className={'today'}
+                    salahTimes={updatedSalahTimes}
+                    fajar={fajar.iqamah}
+                    shuruq={shuruq}
+                    zuhar={zuhar.iqamah}
+                    asar={asar.iqamah}
+                    magrib={magrib.iqamah}
+                    isha={isha.iqamah}
+                    friday={zuhar.iqamah}/>
 
-                <Row className={'today'}>
-                    <Col sm={12}>
-                        <Row>
-
-                            <Col className={'title'}> Fajar </Col>
-                            <Col className={'time'}><Moment format={iqamFormat}>{fajar.iqamah}</Moment></Col>
-                        </Row>
-                        <Row>
-
-                            <Col className={'title'}> Sharooq </Col>
-                            <Col className={'time'}><Moment format={iqamFormat}>{shuruq}</Moment></Col>
-                        </Row>
-                        <Row>
-
-                            <Col className={'title'}> Zuhar </Col>
-                            <Col className={'time'}><Moment format={iqamFormat}>{zuhar.iqamah}</Moment></Col>
-                        </Row>
-                        <Row>
-                            <Col className={'title'}> Aser </Col>
-                            <Col className={'time'}><Moment format={iqamFormat}>{asar.iqamah}</Moment></Col>
-                        </Row>
-                        <Row>
-                            <Col className={'title'}> Magrib </Col>
-                            <Col className={'time'}><Moment format={iqamFormat}>{magrib.iqamah}</Moment></Col>
-                        </Row>
-                        <Row>
-                            <Col className={'title'}> Isha </Col>
-                            <Col className={'time'}><Moment format={iqamFormat}>{isha.iqamah}</Moment></Col>
-                        </Row>
-                    </Col>
-
-                </Row>
             </Container>
-        </div>
-
-    );
+        </div>);
 }
 
-export default Dashboard1080;
+export default Dashboard1920;

@@ -1,34 +1,18 @@
 
-.App {
-    margin-top: 10px;
-    text-align: center;
+.toprow {
+    height: 180px;
 
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-    pointer-events: none;
+.masjid-name {
+    padding-top: 10px;
+    font-size: 0.25in;
 }
 
-.App-header {
-
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
 
 .toprow {
     height: 200px;
+    margin-bottom: 20px;
 }
 
 .toprow .row {
@@ -37,49 +21,27 @@
 
 .masjid-name {
 
+    align-content: center;
 }
 
 .next-salah {
-    display: inline-flex;
-    flex-horizontal-center: 1;
-    flex-direction: row;
     vertical-align: bottom;
     margin-top: 35px;
 
 }
 
-.next-salah .continer {
-
-}
-
 .next-salah .contine .title {
-    font-size: 50px;
-    display: inline-flex;
-    color: #eeeeff;
-    font-size: 35px;
-    margin-right: 10px;
+
 }
 
 .next-salah .time {
-    letter-spacing: normal;
-    font-size: 35px;
-    display: flex;
-    flex-direction: row;
+
 }
 
 .next-salah div {
     color: greenyellow;
-    font-size: 40px;
+    font-size: 35px;
 
-}
-
-.toprow {
-    height: 180px;
-}
-
-.masjid-name {
-    padding-top: 10px;
-    font-size: 0.25in;
 }
 
 
@@ -110,10 +72,13 @@
 }
 
 
-.timecontainer .date {
+.date {
+
+    font-size: 0.4in;
 }
 
-.timecontainer .date-hijri {
+.date-hijri {
+    font-size: 0.4in;
 }
 
 .middle-row {
@@ -142,16 +107,37 @@
 }
 
 .today .title {
-    font-size: 0.60in;
+    font-size: 0.50in;
     margin-top: 30px;
 }
 
-.today .iqama {
-    color: greenyellow;
-    font-size: 0.70in;
+
+.today time {
+    color: white;
+    font-size: 0.94in;
     margin-top: 30px;
 }
 
+.today .current {
+    color: greenyellow
+}
+
+.info time {
+    font-size: 60%;
+    color: gray;
+}
+
+.today .col {
+    border: black 7px solid;
+    border-radius: 15px;
+}
+
+
+.today .friday {
+
+    border-right: black 7px solid;
+
+}
 
 @keyframes App-logo-spin {
     from {
