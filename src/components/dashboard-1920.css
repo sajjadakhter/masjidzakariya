@@ -1,0 +1,149 @@
+
+.toprow {
+    height: 180px;
+
+}
+
+.masjid-name {
+    padding-top: 10px;
+    font-size: 0.25in;
+}
+
+
+.toprow {
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.toprow .row {
+    height: 120px;
+}
+
+.masjid-name {
+
+    align-content: center;
+}
+
+.next-salah {
+    vertical-align: bottom;
+    margin-top: 35px;
+
+}
+
+.next-salah .contine .title {
+
+}
+
+.next-salah .time {
+
+}
+
+.next-salah div {
+    color: greenyellow;
+    font-size: 35px;
+
+}
+
+
+.timecontainer {
+    font-weight: bold;
+    font-size: 0.3in;
+}
+
+.timecontainer .time {
+    letter-spacing: 12px;
+    font-size: 1.8in;
+    font-weight: bold;
+    display: inline-flex;
+    flex-horizontal-center: 1;
+    flex-direction: row;
+    vertical-align: bottom;
+
+}
+
+.timecontainer .time .ampm {
+    letter-spacing: normal;
+    font-size: 20%;
+    font-weight: normal;
+    margin-top: 1.4in;
+    margin-right: 0px;
+    width: 100px;
+
+}
+
+
+.date {
+
+    font-size: 0.4in;
+}
+
+.date-hijri {
+    font-size: 0.4in;
+}
+
+.middle-row {
+    margin-top: 1.9in;
+}
+
+.middle-row {
+    font-size: 0.3in;
+}
+
+.middle-row .title {
+    font-size: 0.4in;
+    color: #eeeeff;
+    font-weight: bold;
+}
+
+.tomorrow .iqama {
+
+}
+
+
+.today {
+    margin-top: 100px;
+    font-size: 0.50in;
+
+}
+
+.today .title {
+    font-size: 0.50in;
+    margin-top: 30px;
+}
+
+
+.today time {
+    color: white;
+    font-size: 0.94in;
+    margin-top: 30px;
+}
+
+.today .current {
+    color: greenyellow
+}
+
+.info time {
+    font-size: 60%;
+    color: gray;
+}
+
+.today .col {
+    border: black 7px solid;
+    border-radius: 15px;
+}
+
+
+.today .friday {
+
+    border-right: black 7px solid;
+
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
