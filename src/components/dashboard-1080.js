@@ -9,6 +9,7 @@ import NextSalahDisplay from "./nextSalahDisplay";
 import {useNextSalah} from "./useNextSalah";
 import CurrentDateDisplay from "./CurrentDateDisplay";
 import useClock from "./useClock"
+import {useQueryParams, NumberParam} from "use-query-params";
 
 function Dashboard1920() {
 
@@ -18,9 +19,10 @@ function Dashboard1920() {
 
     const today = moment();
     const tomorrow = moment().add(1, 'days');
+    const [query, setQuery] = useQueryParams({masjidid: NumberParam});
 
-    const [fajar, zuhar, asar, magrib, isha, shuruq, hijri, salahTimes, masjidInfo] = useSalahTimes(today.date(), today.month() + 1, today.year(), 4230);
-    const [tfajar, tzuhar, tasar, tmagrib, tisha, tshuruq, thijri, tsalahTimes] = useSalahTimes(tomorrow.date(), tomorrow.month() + 1, tomorrow.year(), 4230);
+    const [fajar, zuhar, asar, magrib, isha, shuruq, hijri, salahTimes, masjidInfo] = useSalahTimes(today.date(), today.month() + 1, today.year(), query.masjidid);
+    const [tfajar, tzuhar, tasar, tmagrib, tisha, tshuruq, thijri, tsalahTimes] = useSalahTimes(tomorrow.date(), tomorrow.month() + 1, tomorrow.year(), query.masjidid);
     const [nextsalahName, nextsalah, salahMsg, updatedSalahTimes] = useNextSalah(fajar, shuruq, zuhar, asar, magrib, isha, tfajar, today, datetime, salahTimes);
 
     return (

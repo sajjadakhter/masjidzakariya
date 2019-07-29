@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import moment from "moment";
-
+import {
+    useQueryParams,
+    StringParam,
+    NumberParam,
+    ArrayParam,
+} from 'use-query-params';
 
 export const useSalahTimes = (day, month, year, masjidId) => {
     const [fajar, setFajar] = useState({});
@@ -19,6 +24,8 @@ export const useSalahTimes = (day, month, year, masjidId) => {
         const mtime = moment(fullTime, "hh:mm a YYYY:M:D");
         return mtime;
     };
+
+
     useEffect(() => {
         const iqamahUrl = 'http://ummahsoft.org/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
 

@@ -22,6 +22,7 @@ export const useNextSalah = (fajar, shuruq, zuhar, asar, magrib, isha, tfajar, t
             for (i = 0; i < salahTimes.length; i++) {
                 var current = salahTimes[i]
                 if (today < current.start && current.name !== 'Shuruq') {
+                    setNextsalahName(current.name);
                     current.current = true;
                     updateTimetype(current);
                     break;
