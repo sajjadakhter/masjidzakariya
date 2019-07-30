@@ -9,14 +9,14 @@ const App = () => {
         return require("./components/dashboard-1920").default();
     } else if (window.innerWidth >= 1080) {
         return require("./components/dashboard-1080").default();
-    } else if (window.innerWidth >= 400) {
+    } else if (window.innerWidth >= 320) {
         return require("./components/dashboard-400").default();
     }
 
     return (
         <h1>
             Current screen width {window.innerWidth} is not currently supported
-            Only supported with are 1920,1080 and 400
+            Only supported devices with at least more than 320 width.
         </h1>
     );
 };
