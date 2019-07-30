@@ -27,7 +27,7 @@ export const useSalahTimes = (day, month, year, masjidId) => {
 
 
     useEffect(() => {
-        const iqamahUrl = 'http://ummahsoft.org/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
+        const iqamahUrl = 'https://ummahsoft.org/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
 
         axios.get(iqamahUrl).then((result) => {
             console.log(result);
