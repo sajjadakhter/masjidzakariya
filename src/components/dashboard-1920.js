@@ -1,37 +1,25 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import {useSalahTimes} from './useSalahTimes'
-import moment from 'moment'
+import './dashboard.css'
 import './dashboard-1920.css';
 import SalahTimesHorizontal from "./SalahTimesHorizontal"
 import CurrentTimeDisplay from "./CurrentTimeDisplay";
 import NextSalahDisplay from "./nextSalahDisplay";
-import {useNextSalah} from "./useNextSalah";
 import CurrentDateDisplay from "./CurrentDateDisplay";
-import useClock from "./useClock"
 import {useQueryParams, NumberParam} from "use-query-params";
+import {useSalahTimes} from "./useSalahTimes";
 
 function Dashboard1920() {
 
-    //const {time, raw: currentTime} = useClock("HH:mm:ss");
-
-    const [datetime, hour, min, second] = useClock();
-
-    const today = moment();
-    const tomorrow = moment().add(1, 'days');
-
     const [query, setQuery] = useQueryParams({masjidid: NumberParam});
-
-    const [fajar, zuhar, asar, magrib, isha, shuruq, hijri, salahTimes, masjidInfo] = useSalahTimes(today.date(), today.month() + 1, today.year(), query.masjidid);
-    const [tfajar, tzuhar, tasar, tmagrib, tisha, tshuruq, thijri, tsalahTimes] = useSalahTimes(tomorrow.date(), tomorrow.month() + 1, tomorrow.year(), query.masjidid);
-    const [nextsalahName, nextsalah, salahMsg, updatedSalahTimes] = useNextSalah(fajar, shuruq, zuhar, asar, magrib, isha, tfajar, today, datetime, salahTimes);
+    const [salah, datetime, masjid] = useSalahTimes(query.masjidid);
 
     return (
         <div className="App">
             <Container fluid>
                 <Row>
                     <Col className={'masjid-name'}>
-                        {masjidInfo.name} {masjidInfo.shortname}
+                        {masjid.name} {masjid.shortname}
                     </Col>
                 </Row>
                 <Row className={'toprow'}>
@@ -39,29 +27,23 @@ function Dashboard1920() {
                     <Col sm={4}>
                         <Col sm={1}/>
                         <Col sm={10}>
-                            <CurrentDateDisplay time={second} hijri={hijri}/>
-                            <NextSalahDisplay salahName={nextsalahName} salahMsg={salahMsg} salahtime={nextsalah}/>
-
+                            <CurrentDateDisplay time={datetime.now.second} hijri={datetime.hijri}/>
+                            <NextSalahDisplay salahName={salah.next.name} salahMsg={salah.next.msg}
+                                              salahtime={salah.next.time}/>
                         </Col>
                         <Col sm={1}/>
                     </Col>
                     <Col sm={2}/>
                     <Col sm={4} className={'timecontainer'}>
-                        <CurrentTimeDisplay tick={second}/>
+                        <CurrentTimeDisplay tick={datetime.now.second}/>
                     </Col>
                     <Col sm={1}/>
                 </Row>
 
                 <SalahTimesHorizontal
                     className={'today'}
-                    salahTimes={updatedSalahTimes}
-                    fajar={fajar.iqamah}
-                    shuruq={shuruq}
-                    zuhar={zuhar.iqamah}
-                    asar={asar.iqamah}
-                    magrib={magrib.iqamah}
-                    isha={isha.iqamah}
-                    friday={zuhar.iqamah}/>
+                    salahTimes={salah.times}
+                />
 
             </Container>
         </div>);

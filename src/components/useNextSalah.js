@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
 
-export const useNextSalah = (fajar, shuruq, zuhar, asar, magrib, isha, tfajar, today, time, salahTimes) => {
+export const useNextSalah = (tfajar, today, salahTimes) => {
         const [nextsalah, setNextsalah] = useState('');
+        const [currentSalah, setCurrentsalah] = useState('');
         const [nextsalahName, setNextsalahName] = useState('Fajar');
         const [salahMsg, setsalahMsg] = useState('');
         const [updatedSalahTimes, setUpdateSalahTimes] = useState([]);
@@ -16,32 +17,54 @@ export const useNextSalah = (fajar, shuruq, zuhar, asar, magrib, isha, tfajar, t
             }
         };
 
-        useEffect(() => {
-            salahTimes.forEach(item => item.current = false);
+        const getNextSalah = (salahTimes, i) => {
+            if (i >= salahTimes.length - 2) {
+                return salahTimes[0];
+            }
+            if (i === 0 || i === 1) {
+                return salahTimes[2];
+            }
+            return salahTimes[i + 1];
+        };
+
+        const getCurrentSalahIndex = (salahTimes) => {
             var i = 0;
             for (i = 0; i < salahTimes.length; i++) {
-                var current = salahTimes[i]
-                if (today < current.start && current.name !== 'Shuruq') {
-                    setNextsalahName(current.name);
-                    current.current = true;
-                    updateTimetype(current);
-                    break;
+                var cur = salahTimes[i];
+                if (today >= cur.start && today < cur.end) {
+                    return i;
                 }
             }
 
-            if (salahTimes.length > 0 && i >= salahTimes.length) {
-                setNextsalahName('Fajar');
-                updateTimetype(tfajar);
-                salahTimes[0].current = true;
-            }
+            return 5;
+        };
 
-            if (salahTimes.length > 6) {
-                salahTimes[5].end = tfajar.start;
+        const isItFriday = () => {
+            return (today.day() === 5);
+        };
+
+        useEffect(() => {
+            if (salahTimes === undefined || salahTimes.length < 5) {
+                return;
             }
+            var currIndex = getCurrentSalahIndex(salahTimes);
+            var next = getNextSalah(salahTimes, currIndex);
+
+            salahTimes.forEach(item => {
+                item.next = false;
+                item.current = false
+            });
+
+            salahTimes[currIndex].current = true;
+            next.next = true;
+
+            setNextsalahName(next.name);
+            setNextsalah(next.iqamah);
+            setsalahMsg("");
+
+
             setUpdateSalahTimes(salahTimes);
-
-
-        }, [fajar, zuhar, asar, magrib, isha, shuruq, time]);
+        }, [tfajar, salahTimes]);
 
         return [nextsalahName, nextsalah, salahMsg, updatedSalahTimes];
     }

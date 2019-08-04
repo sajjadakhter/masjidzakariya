@@ -2,7 +2,7 @@ import {Col, Row} from "react-bootstrap";
 import Moment from "react-moment";
 import React from "react";
 
-const SalahTimesVertical = ({fajar, shuruq, zuhar, asar, magrib, isha, friday, className, showIqamaTitle, salahTimes}) => {
+const SalahTimesVertical = ({className, showIqamaTitle, salahTimes}) => {
     const iqamFormat = "h:mm";
     return (
         <Row className={className}>

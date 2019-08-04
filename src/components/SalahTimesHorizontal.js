@@ -2,7 +2,7 @@ import {Col, Row} from "react-bootstrap";
 import Moment from "react-moment";
 import React from "react";
 
-const SalahTimesHorizontal = ({fajar, shuruq, zuhar, asar, magrib, isha, friday, className, showIqamaTitle, salahTimes}) => {
+const SalahTimesHorizontal = ({className, showIqamaTitle, salahTimes}) => {
     const iqamFormat = "h:mm";
     return (
         <Row className={className}>
@@ -15,24 +15,25 @@ const SalahTimesHorizontal = ({fajar, shuruq, zuhar, asar, magrib, isha, friday,
                     </Col>
                     }
                     {salahTimes.map((item) => {
-                        return <Col>
+                        return <Col className={item.current ? 'current' : (item.next ? 'next' : '')}>
                             <div className={'title'}>{item.name}</div>
-                            <Moment className={item.current ? 'current' : ''} format={iqamFormat}>
+                            <Moment className={'time'}
+                                    format={iqamFormat}>
                                 {item.name === 'Shuruq' ? item.start : item.iqamah}
                             </Moment>
                             {item.name !== 'Shuruq' &&
                             <div className={'info'}>
                                 <Moment format={iqamFormat}>
                                     {item.start}
-                                </Moment>-<Moment format={iqamFormat}>{item.end}</Moment>
+                                </Moment>
+                                <span>-</span>
+                                <Moment format={iqamFormat}>{item.end}</Moment>
                             </div>
                             }
                         </Col>
                     })}
                 </Row>
-
             </Col>
-            <Col sm={1}></Col>
         </Row>
     );
 };

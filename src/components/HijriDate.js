@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import ordinal from "ordinal"
 
 function hijriToString(day, month, year) {

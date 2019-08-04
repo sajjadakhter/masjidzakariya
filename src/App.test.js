@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dashboard1920 from './components/App';
+import App from './App';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Dashboard1920/>, div);
+    ReactDOM.render(<App/>, div);
     ReactDOM.unmountComponentAtNode(div);
 });
