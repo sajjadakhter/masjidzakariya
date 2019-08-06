@@ -1,8 +1,5 @@
-import {Col} from "react-bootstrap";
-
 import moment from 'moment'
 import React from "react";
-
 
 const NextSalahDisplay = ({salahName, salahtime, salahMsg}) => {
     return (

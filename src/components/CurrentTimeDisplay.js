@@ -1,15 +1,29 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import moment from 'moment'
 
 const CurrentTimeDisplay = ({tick}) => {
+    const [datetime, setdatetime] = useState(moment());
+    useEffect(() => {
+        tick();
+        const timerID = setInterval(() => tick(), 1000);
+        return function cleanup() {
+            clearInterval(timerID);
+        };
 
-    const time = moment();
+    }, []);
+
+    function tick() {
+        const now = moment();
+        setdatetime(now);
+
+    }
+
     return (
         <div>
             <div>
                 <div className={'time'}>
-                    <div>{time.format(" h:mm ")}</div>
-                    <div className={'ampm'}>{time.format(" ss a")}</div>
+                    <div>{datetime.format(" h:mm ")}</div>
+                    <div className={'ampm'}>{datetime.format(" ss a")}</div>
                 </div>
             </div>
 

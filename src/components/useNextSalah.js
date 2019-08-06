@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-
 export const useNextSalah = (tfajar, today, salahTimes) => {
         const [nextsalah, setNextsalah] = useState('');
         const [currentSalah, setCurrentsalah] = useState('');
@@ -35,7 +34,6 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
                     return i;
                 }
             }
-
             return 5;
         };
 
@@ -62,13 +60,9 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
             setNextsalah(next.iqamah);
             setsalahMsg("");
 
-
             setUpdateSalahTimes(salahTimes);
         }, [tfajar, salahTimes]);
 
         return [nextsalahName, nextsalah, salahMsg, updatedSalahTimes];
     }
 ;
-
-
-

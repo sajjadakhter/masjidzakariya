@@ -20,7 +20,7 @@ function useClock(props) {
     //Replaces componentDidMount and componentWillUnmount
     useEffect(() => {
         tick();
-        const timerID = setInterval(() => tick(), 1000);
+        const timerID = setInterval(() => tick(), 15000);
         return function cleanup() {
             clearInterval(timerID);
         };
