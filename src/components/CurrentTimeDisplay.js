@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import moment from 'moment'
 
-const CurrentTimeDisplay = ({tick}) => {
+const CurrentTimeDisplay = () => {
     const [datetime, setdatetime] = useState(moment());
     useEffect(() => {
         tick();
