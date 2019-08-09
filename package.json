@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://ummahsoft.org",
+  "homepage": "https://masjiddashboard.herokuapp.com",
   "engines": {
     "node": ">=12.4.0",
     "npm": ">=6.9.2"
