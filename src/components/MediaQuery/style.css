@@ -1,4 +1,4 @@
-@media only screen and (max-width: 1920px) {
+@media only screen and (min-width: 1900px) {
     .MediaQuery-1920 {
         display: block;
     }
@@ -6,9 +6,13 @@
     .MediaQuery-1080 {
         display: none;
     }
+
+    .MediaQuery-320 {
+        display: none;
+    }
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (min-width: 1080px) {
     .MediaQuery-1920 {
         display: none;
     }
@@ -16,5 +20,22 @@
     .MediaQuery-1080 {
         display: block;
     }
+
+    .MediaQuery-320 {
+        display: none;
+    }
 }
 
+@media only screen and (min-width: 320px) {
+    .MediaQuery-1920 {
+        display: none;
+    }
+
+    .MediaQuery-1080 {
+        display: none;
+    }
+
+    .MediaQuery-320 {
+        display: block;
+    }
+}

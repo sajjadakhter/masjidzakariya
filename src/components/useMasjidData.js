@@ -18,7 +18,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
             console.log("ignoring as invlad date/time");
             return
         }
-        const iqamahUrl = 'https://ummahsoft.org/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
+        const iqamahUrl = '/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
 
         axios.get(iqamahUrl).then((result) => {
             console.log(result);
