@@ -41,7 +41,7 @@ function useClock(props) {
         setsecond(now.second());
 
         settomorrowday(tomorrow.date());
-        settomorrowmonth(tomorrow.month());
+        settomorrowmonth(tomorrow.month() + 1);
         settomorrowyear(tomorrow.year());
     }
 

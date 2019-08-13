@@ -16,14 +16,16 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
             }
         };
 
-        const getNextSalah = (salahTimes, i) => {
+        const getNextSalah = (salahTimes, tfajar, i) => {
+            console.log(tfajar);
             if (i >= salahTimes.length - 2) {
-                return salahTimes[0];
+                console.log(tfajar);
+                return [tfajar, 0];
             }
             if (i === 0 || i === 1) {
-                return salahTimes[2];
+                return [salahTimes[2], 2];
             }
-            return salahTimes[i + 1];
+            return [salahTimes[i + 1], i + 1];
         };
 
         const getCurrentSalahIndex = (salahTimes) => {
@@ -42,22 +44,25 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
         };
 
         useEffect(() => {
-            if (salahTimes === undefined || salahTimes.length < 5) {
+
+            if (salahTimes === undefined || salahTimes.length < 5 || tfajar === undefined) {
                 return;
             }
             var currIndex = getCurrentSalahIndex(salahTimes);
-            var next = getNextSalah(salahTimes, currIndex);
+            var [nextSalah, nextIndex] = getNextSalah(salahTimes, tfajar, currIndex);
 
             salahTimes.forEach(item => {
                 item.next = false;
                 item.current = false
             });
 
-            salahTimes[currIndex].current = true;
-            next.next = true;
+            if (currIndex !== 1) { // there is no current between sharuq and zuhar
+                salahTimes[currIndex].current = true;
+            }
+            salahTimes[nextIndex].next = true;
 
-            setNextsalahName(next.name);
-            setNextsalah(next.iqamah);
+            setNextsalahName(nextSalah.name);
+            setNextsalah(nextSalah.iqamah);
             setsalahMsg("");
 
             setUpdateSalahTimes(salahTimes);
