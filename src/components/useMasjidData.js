@@ -30,7 +30,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
             console.log("hijri", hijri);
             setSalahTimes([
                 {
-                    name: 'Fajar',
+                    name: 'Fajr',
                     start: convertToDateTime(d.fajr_start_time, year, month, day),
                     end: convertToDateTime(d.shuruq, year, month, day),
                     iqamah: convertToDateTime(info.fajr_iqama_time, year, month, day),
@@ -43,7 +43,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
                     end: convertToDateTime(d.zuhr_start_time, year, month, day)
                 },
                 {
-                    name: 'Zuhar',
+                    name: 'Zuhr',
                     start: convertToDateTime(d.zuhr_start_time, year, month, day),
                     end: convertToDateTime(d.asr_start_time, year, month, day),
                     iqamah: convertToDateTime(info.zuhr_iqama_time, year, month, day),
@@ -51,7 +51,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
                     next: false
                 },
                 {
-                    name: 'Asar',
+                    name: 'Asr',
                     start: convertToDateTime(d.asr_start_time, year, month, day),
                     end: convertToDateTime(d.magrib_start_time, year, month, day),
                     iqamah: convertToDateTime(info.asr_iqama_time, year, month, day),
@@ -75,7 +75,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
                     next: false
                 },
                 {
-                    name: 'Friday',
+                    name: 'Jumua',
                     start: convertToDateTime(d.zuhr_start_time, year, month, day),
                     end: convertToDateTime(d.asr_start_time, year, month, day),
                     iqamah: convertToDateTime(info.jumma1_iqama, year, month, day),
