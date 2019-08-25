@@ -20,7 +20,11 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
             console.log(tfajar);
             if (i >= salahTimes.length - 2) {
                 console.log(tfajar);
-                return [tfajar, 0];
+                if (today.hours() > 12) {
+                    return [tfajar, 0];
+                } else {
+                    return [salahTimes[0], 0]
+                }
             }
             if (i === 0 || i === 1) {
                 return [salahTimes[2], 2];
