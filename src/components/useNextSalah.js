@@ -6,6 +6,11 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
         const [nextsalahName, setNextsalahName] = useState('Fajar');
         const [salahMsg, setsalahMsg] = useState('');
         const [updatedSalahTimes, setUpdateSalahTimes] = useState([]);
+
+        function jsonCopy(src) {
+            return JSON.parse(JSON.stringify(src));
+        }
+
         const updateTimetype = (salahtime) => {
             if (today < salahtime.start) {
                 setsalahMsg('starts');
@@ -17,9 +22,8 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
         };
 
         const getNextSalah = (salahTimes, tfajar, i) => {
-            console.log(tfajar);
+
             if (i >= salahTimes.length - 2) {
-                console.log(tfajar);
                 if (today.hours() > 12) {
                     return [tfajar, 0];
                 } else {
@@ -52,24 +56,26 @@ export const useNextSalah = (tfajar, today, salahTimes) => {
             if (salahTimes === undefined || salahTimes.length < 5 || tfajar === undefined) {
                 return;
             }
-            var currIndex = getCurrentSalahIndex(salahTimes);
-            var [nextSalah, nextIndex] = getNextSalah(salahTimes, tfajar, currIndex);
+            var salahTimes2 = jsonCopy(salahTimes);
 
-            salahTimes.forEach(item => {
+            var currIndex = getCurrentSalahIndex(salahTimes2);
+            var [nextSalah, nextIndex] = getNextSalah(salahTimes2, tfajar, currIndex);
+
+            salahTimes2.forEach(item => {
                 item.next = false;
                 item.current = false
             });
 
             if (currIndex !== 1) { // there is no current between sharuq and zuhar
-                salahTimes[currIndex].current = true;
+                salahTimes2[currIndex].current = true;
             }
-            salahTimes[nextIndex].next = true;
+            salahTimes2[nextIndex].next = true;
 
             setNextsalahName(nextSalah.name);
             setNextsalah(nextSalah.iqamah);
             setsalahMsg("");
 
-            setUpdateSalahTimes(salahTimes);
+            setUpdateSalahTimes(salahTimes2);
         }, [tfajar, salahTimes]);
 
         return [nextsalahName, nextsalah, salahMsg, updatedSalahTimes];
