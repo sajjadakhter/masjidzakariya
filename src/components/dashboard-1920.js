@@ -28,7 +28,7 @@ function Dashboard1920() {
                         <Col sm={1}/>
                         <Col sm={10}>
                             <CurrentDateDisplay time={datetime.now.second} hijri={datetime.hijri}/>
-                            <NextSalahDisplay salahTimes={salah} currTime={datetime.now}/>
+                            <NextSalahDisplay salahTimes={salah} currTime={datetime.now.raw}/>
                         </Col>
                         <Col sm={1}/>
                     </Col>

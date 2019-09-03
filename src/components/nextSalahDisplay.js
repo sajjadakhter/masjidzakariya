@@ -7,18 +7,24 @@ const NextSalahDisplay = ({salahTimes, currTime}) => {
         return <div></div>
     }
     var salah = salahTimes.today.times[salahTimes.nextIndex];
+    var salahTime = salahTimes.today.times[salahTimes.nextIndex].start;
     var msg = ''
-    if (salahTimes.currIndex >= 0) {
-        if (salahTimes.today.times[salahTimes.currIndex].iqamah > currTime) {
-            salah = salahTimes.today.times[salahTimes.currIndex]
+    if (salahTimes.currentIndex >= 0) {
+        console.log({curr: salahTimes.today.times[salahTimes.currentIndex], time: currTime});
+        if (salahTimes.today.times[salahTimes.currentIndex].iqamah > currTime) {
+            console.log({next: salahTimes.today.times[salahTimes.currentIndex]})
+            salah = salahTimes.today.times[salahTimes.currentIndex];
+            salahTime = salahTimes.today.times[salahTimes.currentIndex].iqamah
             msg = 'iqamah '
+        } else {
+            console.log(salahTimes.today.times[salahTimes.currentIndex].iqamah >= currTime)
         }
     }
     return (
         <div className={'next-salah'}>
             <div className={'title'}> {salah.name} {msg} is in</div>
             <div
-                className={'time'}>  {moment.duration(moment(salah.start).diff(moment())).format(", h [hours], m [minutes]", {trim: true})}</div>
+                className={'time'}>  {moment.duration(moment(salahTime).diff(moment())).format(", h [hours], m [minutes]", {trim: true})}</div>
         </div>
     );
 };
