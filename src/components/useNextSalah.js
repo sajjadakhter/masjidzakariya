@@ -1,83 +1,60 @@
 import React, {useEffect, useState} from 'react';
 
-export const useNextSalah = (tfajar, today, salahTimes) => {
-        const [nextsalah, setNextsalah] = useState('');
-        const [currentSalah, setCurrentsalah] = useState('');
-        const [nextsalahName, setNextsalahName] = useState('Fajar');
-        const [salahMsg, setsalahMsg] = useState('');
-        const [updatedSalahTimes, setUpdateSalahTimes] = useState([]);
+export const useNextSalah = (currentTime, salahTimes) => {
+        const [next, setNext] = useState(-1);
+        const [current, setCurrent] = useState(-1);
 
-        function jsonCopy(src) {
-            return JSON.parse(JSON.stringify(src));
-        }
+        const getNextSalahIndex = (salahTimes) => {
 
-        const updateTimetype = (salahtime) => {
-            if (today < salahtime.start) {
-                setsalahMsg('starts');
-                setNextsalah(salahtime.start);
-            } else if (today < salahtime.iqamah) {
-                setsalahMsg('iqamah');
-                setNextsalah(salahtime.iqamah);
-            }
-        };
+            var i = 0;
 
-        const getNextSalah = (salahTimes, tfajar, i) => {
-
-            if (i >= salahTimes.length - 2) {
-                if (today.hours() > 12) {
-                    return [tfajar, 0];
-                } else {
-                    return [salahTimes[0], 0]
+            for (i = 0; i < salahTimes.length; i++) {
+                var cur = salahTimes[i];
+                if (currentTime < cur.start) {
+                    return i;
                 }
             }
-            if (i === 0 || i === 1) {
-                return [salahTimes[2], 2];
-            }
-            return [salahTimes[i + 1], i + 1];
+
+            return 0; //its after ish then next is fajar
         };
 
         const getCurrentSalahIndex = (salahTimes) => {
             var i = 0;
             for (i = 0; i < salahTimes.length; i++) {
                 var cur = salahTimes[i];
-                if (today >= cur.start && today < cur.end) {
+                if (i === 4 && (currentTime < cur.end || currentTime >= cur.start)) {
+                    return 4;
+                }
+
+                if (currentTime >= cur.start && currentTime < cur.end) {
                     return i;
                 }
+
             }
-            return 5;
+
+            return -1;
         };
 
-        const isItFriday = () => {
-            return (today.day() === 5);
-        };
+        // const isItFriday = () => {
+        //     return (currentTime.day() === 5);
+        // };
 
         useEffect(() => {
 
-            if (salahTimes === undefined || salahTimes.length < 5 || tfajar === undefined) {
+            if (salahTimes === undefined || salahTimes.length < 5) {
                 return;
             }
-            var salahTimes2 = jsonCopy(salahTimes);
 
-            var currIndex = getCurrentSalahIndex(salahTimes2);
-            var [nextSalah, nextIndex] = getNextSalah(salahTimes2, tfajar, currIndex);
+            const currIndex = getCurrentSalahIndex(salahTimes);
+            setCurrent(currIndex);
 
-            salahTimes2.forEach(item => {
-                item.next = false;
-                item.current = false
-            });
 
-            if (currIndex !== 1) { // there is no current between sharuq and zuhar
-                salahTimes2[currIndex].current = true;
-            }
-            salahTimes2[nextIndex].next = true;
+            const nextIndex = getNextSalahIndex(salahTimes);
+            setNext(nextIndex);
 
-            setNextsalahName(nextSalah.name);
-            setNextsalah(nextSalah.iqamah);
-            setsalahMsg("");
+            console.log({currIndex: currIndex, nextIndex: nextIndex, currentTime: currentTime.toString()})
+        }, [salahTimes, currentTime]);
 
-            setUpdateSalahTimes(salahTimes2);
-        }, [tfajar, salahTimes]);
-
-        return [nextsalahName, nextsalah, salahMsg, updatedSalahTimes];
+        return [current, next];
     }
 ;

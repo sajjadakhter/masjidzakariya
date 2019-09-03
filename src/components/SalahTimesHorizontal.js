@@ -4,6 +4,7 @@ import React from "react";
 
 const SalahTimesHorizontal = ({className, showIqamaTitle, salahTimes}) => {
     const iqamFormat = "h:mm";
+
     return (
         <Row className={className}>
             <Col sm={1}/>
@@ -14,8 +15,9 @@ const SalahTimesHorizontal = ({className, showIqamaTitle, salahTimes}) => {
                         <Row>Iqama</Row>
                     </Col>
                     }
-                    {salahTimes.map((item) => {
-                        return <Col className={item.current ? 'current' : (item.next ? 'next' : '')}>
+                    {salahTimes.today.times.map((item, i) => {
+                        return <Col
+                            className={i === salahTimes.currentIndex ? 'current' : (i == salahTimes.nextIndex ? 'next' : '')}>
                             <div className={'title'}>{item.name}</div>
                             <Moment className={'time'}
                                     format={iqamFormat}>
