@@ -3,8 +3,8 @@ import axios from "axios";
 import moment from "moment";
 
 function convertToDateTime(time, year, month, day) {
-    const fullTime = time + year + ':' + month + ':' + day;
-    const mtime = moment(fullTime, "hh:mm a YYYY:M:D");
+    const fullTime = time + ' ' + year + ':' + month + ':' + day;
+    const mtime = moment(moment(fullTime, "hh:mm a YYYY:MM:DD").toString())
     return mtime;
 };
 
@@ -28,7 +28,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
             const info = result.data.masjidInfo;
             setMasjidInfo({name: info.title, shortname: JSON.parse(info.masjid_preferences).short_name});
             const d = result.data.prayerTimes[day - 1];
-            setHijri({month: parseInt(d.hijri_month), day: parseInt(d.hijri_day), year: 1440, date: d.hijri_date});
+            setHijri({month: parseInt(d.hijri_month), day: parseInt(d.hijri_day) - 1, year: 1440, date: d.hijri_date});
             console.log("hijri", hijri);
             setSalahTimes([
                 {
@@ -81,3 +81,10 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
 
     return [salahTimes, otherTimes, hijri, masjidInfo];
 };
+
+<div id='masjidi-iqamadiv'></div>
+< script >
+var _divIframe = document.getElementById('masjidi-iqamadiv');
+var srcURL = 'http://ummahsoft.org/salahtime/masjid-embed/widget_prayer.php?masjid_id=4230&titlefontcolor=000000&fontcolor=000000&bgcolor=FFFFFF&bgcellcolor=FCFCFC&bordercolor=B5DCF8&hijridisplay=1&random=' + Date.now();
+_divIframe.innerHTML = '<iframe src="' + srcURL + '" name="' + Date.now() + '" frameborder=0 width=238 height=400 marginwidth=1 marginheight=0 scrolling="no"/>';
+</script>

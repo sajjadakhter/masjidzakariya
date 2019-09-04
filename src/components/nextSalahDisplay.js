@@ -10,9 +10,11 @@ const NextSalahDisplay = ({salahTimes, currTime}) => {
     var salahTime = salahTimes.today.times[salahTimes.nextIndex].start;
     var msg = ''
     if (salahTimes.currentIndex >= 0) {
-        console.log({curr: salahTimes.today.times[salahTimes.currentIndex], time: currTime});
-        if (salahTimes.today.times[salahTimes.currentIndex].iqamah > currTime) {
-            console.log({next: salahTimes.today.times[salahTimes.currentIndex]})
+        if (currTime.hour() > 12 && salahTimes.nextIndex == 0 && salahTimes.tomorrow.times != undefined && salahTimes.tomorrow.times.length >= 4) {
+            //after isha next fajar
+            salah = salahTimes.tomorrow.times[0];
+            salahTime = salahTimes.tomorrow.times[0].start;
+        } else if (salahTimes.today.times[salahTimes.currentIndex].iqamah > currTime) {
             salah = salahTimes.today.times[salahTimes.currentIndex];
             salahTime = salahTimes.today.times[salahTimes.currentIndex].iqamah
             msg = 'iqamah '
