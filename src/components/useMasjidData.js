@@ -81,10 +81,3 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
 
     return [salahTimes, otherTimes, hijri, masjidInfo];
 };
-
-<div id='masjidi-iqamadiv'></div>
-< script >
-var _divIframe = document.getElementById('masjidi-iqamadiv');
-var srcURL = 'http://ummahsoft.org/salahtime/masjid-embed/widget_prayer.php?masjid_id=4230&titlefontcolor=000000&fontcolor=000000&bgcolor=FFFFFF&bgcellcolor=FCFCFC&bordercolor=B5DCF8&hijridisplay=1&random=' + Date.now();
-_divIframe.innerHTML = '<iframe src="' + srcURL + '" name="' + Date.now() + '" frameborder=0 width=238 height=400 marginwidth=1 marginheight=0 scrolling="no"/>';
-</script>
