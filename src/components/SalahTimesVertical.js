@@ -9,8 +9,9 @@ const SalahTimesVertical = ({className, showIqamaTitle, salahTimes}) => {
             <Col sm={1}/>
             <Col sm={10}>
                 <Row> </Row>
-                {salahTimes.map((item) => {
-                    return <Row style={{alignContent: 'center'}} className={item.current ? 'current' : ''}>
+                {salahTimes.today.times.map((item, i) => {
+                    return <Row style={{alignContent: 'center'}}
+                                className={i === salahTimes.currentIndex ? 'current' : (i == salahTimes.nextIndex ? 'next' : '')}>
                         <Col className={'title'}>{item.name}</Col>
                         <Col> {item.name !== 'Shuruq' &&
                         <div className={'info'}>

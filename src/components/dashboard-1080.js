@@ -26,8 +26,7 @@ function Dashboard1920() {
                     <Col sm={4}>
                         <Col sm={1}/>
                         <Col sm={10}>
-                            <NextSalahDisplay salahName={salah.next.name} salahMsg={salah.next.msg}
-                                              salahtime={salah.next.time}/>
+                            <NextSalahDisplay salahTimes={salah} currTime={datetime.now.raw}/>
                         </Col>
                         <Col sm={1}/>
                     </Col>
@@ -42,7 +41,7 @@ function Dashboard1920() {
 
                 <SalahTimesVertical
                     className={'today'}
-                    salahTimes={salah.times}
+                    salahTimes={salah}
                 />
 
             </Container>
