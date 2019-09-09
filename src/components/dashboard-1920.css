@@ -1,4 +1,8 @@
 
+body {
+    background: black;
+}
+
 .toprow {
     height: 180px;
 }
@@ -82,7 +86,7 @@
 }
 
 .today .col {
-    border: black 7px solid;
+    border: #1b1e21 7px solid;
     border-radius: 15px;
 }
 
