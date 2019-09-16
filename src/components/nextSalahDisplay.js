@@ -9,7 +9,7 @@ const NextSalahDisplay = ({salahTimes, currTime}) => {
     var salah = salahTimes.today.times[salahTimes.nextIndex];
     var salahTime = salahTimes.today.times[salahTimes.nextIndex].start;
     var msg = ''
-    if (salahTimes.currentIndex >= 0) {
+    if (salahTimes.currentIndex >= 0 && currTime >= salahTimes.today.times[0].start) {
         if (salahTimes.today.times[salahTimes.currentIndex].iqamah > currTime) {
             salah = salahTimes.today.times[salahTimes.currentIndex];
             salahTime = salahTimes.today.times[salahTimes.currentIndex].iqamah

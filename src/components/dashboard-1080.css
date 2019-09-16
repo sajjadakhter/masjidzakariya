@@ -44,8 +44,8 @@ body {
 }
 
 .next-salah {
-    vertical-align: bottom;
-    margin-top: 35px;
+    vertical-align: top;
+    margin-top: 0px;
 
 }
 
@@ -79,23 +79,22 @@ body {
 }
 
 .timecontainer .time {
-    letter-spacing: 12px;
-    font-size: 1.5in;
+    letter-spacing: 0px;
+    font-size: 4in;
     font-weight: bold;
     display: inline-flex;
-    flex-horizontal-center: 1;
-    flex-direction: row;
+
     vertical-align: bottom;
 
 }
 
 .timecontainer .time .ampm {
     letter-spacing: normal;
-    font-size: 20%;
+    font-size: 10%;
     font-weight: normal;
-    margin-top: 1.3in;
+    margin-top: 4.0in;
     margin-right: 0px;
-    Width: 90px;
+    Width: 140px;
 }
 
 
@@ -111,7 +110,7 @@ body {
 }
 
 .middle-row {
-    margin-top: 1.9in;
+    margin-top: 2.9in;
 }
 
 .middle-row {
@@ -130,8 +129,8 @@ body {
 
 
 .today {
-    margin-top: 100px;
-    font-size: 0.70in;
+    margin-top: 0.0in;
+    font-size: 1in;
 
 }
 
@@ -151,8 +150,9 @@ body {
 }
 
 .info time {
-    font-size: 60%;
+    font-size: 50%;
     color: gray;
+
 }
 
 .today .current {
