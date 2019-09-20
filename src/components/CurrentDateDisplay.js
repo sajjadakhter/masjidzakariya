@@ -5,8 +5,8 @@ import moment from 'moment';
 const CurrentDateDisplay = ({tick, hijri}) => {
     const time = moment();
     return (
-        <div>
-            <div className={'date'}>
+        <div className={'date'}>
+            <div className={'date2'}>
                 {time.format("dddd, MMMM Do")}
             </div>
             <div className={'date-hijri'}>

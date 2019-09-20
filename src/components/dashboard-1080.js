@@ -27,19 +27,17 @@ function Dashboard1920() {
                     </Col>
 
                 </Row>
-                <Row className={'toprow'}>
-                    <Col sm={1}/>
-                    <Col sm={4}>
-                        <Col sm={1}/>
-                        <Col sm={10}>
-                            <NextSalahDisplay salahTimes={salah} currTime={datetime.now.raw}/>
-                        </Col>
-                        <Col sm={1}/>
-                    </Col>
-                    <Col sm={6} className={'timecontainer'}>
+                <Row className={'toprow2'}>
+                    <Col className={'timecontainer'}>
                         <CurrentDateDisplay time={datetime.now.second} hijri={datetime.hijri}/>
                     </Col>
-                    <Col sm={1}/>
+
+                </Row>
+                <Row className={'toprow3'}>
+                    <Col className={'timecontainer'}>
+                        <NextSalahDisplay salahTimes={salah} currTime={datetime.now.raw}/>
+                    </Col>
+
                 </Row>
 
                 <Row style={{height: '100px'}}></Row>
