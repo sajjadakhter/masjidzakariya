@@ -22,6 +22,11 @@ function Dashboard1920() {
                         {masjid.name} {masjid.shortname}
                     </Col>
                 </Row>
+                <Row className={'clock'}>
+                    <Col sm={4} className={'timecontainer'}>
+                        <CurrentTimeDisplay tick={datetime.now.second}/>
+                    </Col>
+                </Row>
                 <Row className={'toprow'}>
                     <Col sm={1}/>
                     <Col sm={5}>
@@ -33,9 +38,7 @@ function Dashboard1920() {
                         <Col sm={1}/>
                     </Col>
                     <Col sm={2}/>
-                    <Col sm={4} className={'timecontainer'}>
-                        <CurrentTimeDisplay tick={datetime.now.second}/>
-                    </Col>
+
                     <Col sm={1}/>
                 </Row>
 
