@@ -7,10 +7,15 @@ const NextSalahDisplay = ({salahTimes, currTime}) => {
         return <div></div>
     }
     console.log(salahTimes);
-    var salah = salahTimes.today.times[salahTimes.currentIndex];
+    var salah = salahTimes.today.times[salahTimes.nextIndex];
     var salahTime = salahTimes.today.times[salahTimes.nextIndex].start;
-    var msg = 'is ending';
+    var msg = 'is ';
     var fajarend = salahTimes.today.times[0].end;
+
+    if (salahTimes.currentIndex > 0) {
+        salah = salahTimes.today.times[salahTimes.currentIndex]
+        msg = 'is ending';
+    }
     //todo add config to calculate prohibted time
     if (currTime > fajarend && currTime < moment(fajarend).add(20, "m")) {
         msg = "Prohibited time for Salah";
@@ -28,6 +33,8 @@ const NextSalahDisplay = ({salahTimes, currTime}) => {
             </div>
         );
     }
+
+    console.log(salah, salahTimes)
 
     if (salahTimes.currentIndex >= 0 && currTime >= salahTimes.today.times[0].start) {
         if (salahTimes.today.times[salahTimes.currentIndex].iqamah > currTime) {
