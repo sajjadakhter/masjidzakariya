@@ -16,7 +16,7 @@ const NextSalahDisplay = ({salahTimes, currTime}) => {
         msg = "Prohibited time for Salah";
     } else {
         var zuharstart = salahTimes.today.times[1].start;
-        if (currTime < zuharstart && currTime > moment(zuharstart).subtract(20, "m")) {
+        if (currTime < zuharstart && currTime > moment(zuharstart).subtract(10, "m")) {
             msg = "Prohibited time for Salah";
         }
     }
