@@ -26,6 +26,13 @@ body {
 
 }
 
+.next-salah .alarm {
+    color: red;
+    font-weight: bold;
+    font-size: 50px;
+    animation: blinkingText 5s infinite;
+}
+
 .timecontainer {
     font-size: 0.3in;
 }
@@ -77,12 +84,13 @@ body {
     margin-top: 30px;
 }
 
-.info time {
-    font-size: 60%;
+.today .iqama .info time {
+    font-size: 80%;
+    color: grey;
 }
 
-.info span {
-    font-size: 60%;
+.today .current .info time {
+    color: yellow;
 }
 
 .today .col {

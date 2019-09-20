@@ -24,7 +24,7 @@ function Dashboard1920() {
                 </Row>
                 <Row className={'toprow'}>
                     <Col sm={1}/>
-                    <Col sm={4}>
+                    <Col sm={5}>
                         <Col sm={1}/>
                         <Col sm={10}>
                             <CurrentDateDisplay time={datetime.now.second} hijri={datetime.hijri}/>

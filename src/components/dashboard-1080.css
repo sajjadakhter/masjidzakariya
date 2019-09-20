@@ -131,10 +131,18 @@ body {
     font-size: 1in;
 }
 
-.info time {
-    font-size: 50%;
+.today .info {
+    font-size: 90%;
     color: gray;
+}
 
+.today .current .info {
+    font-size: 90%;
+    color: white;
+}
+
+.today .current .info time {
+    color: yellow;
 }
 
 .today .current {
@@ -162,6 +170,13 @@ body {
     color: greenyellow;
     font-size: 35px;
 
+}
+
+
+.next-salah .alarm {
+    color: red;
+    font-size: 55px;
+    animation: blinkingText 5s infinite;
 }
 
 @keyframes App-logo-spin {
