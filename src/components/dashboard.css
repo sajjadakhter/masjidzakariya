@@ -11,12 +11,7 @@
 
 
 .toprow {
-    height: 200px;
-    margin-bottom: 20px;
-}
 
-.toprow .row {
-    height: 120px;
 }
 
 .masjid-name {
@@ -26,7 +21,7 @@
 
 .next-salah {
     vertical-align: bottom;
-    margin-top: 35px;
+
 
 }
 
@@ -41,12 +36,12 @@
 
 .next-salah div {
     color: greenyellow;
-    font-size: 35px;
 
 }
 
 .next-salah .alarm {
     color: red;
+    animation: blinkingText 5s infinite;
 }
 
 .timecontainer {

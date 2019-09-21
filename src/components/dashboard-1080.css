@@ -64,7 +64,6 @@ body {
     font-size: 3.8in;
     font-weight: bold;
     display: inline-flex;
-
     vertical-align: bottom;
 
 }
@@ -82,9 +81,7 @@ body {
 .toprow2 .timecontainer .date {
     align-content: center;
     align-self: center;
-
-    font-size: 0.4in;
-
+    font-size: 0.5in;
     width: 100%;
 }
 
@@ -141,42 +138,25 @@ body {
     color: white;
 }
 
-.today .current .info time {
-    color: yellow;
-}
-
-.today .current {
-    color: greenyellow
-}
-
 .next-salah {
     vertical-align: top;
     margin-top: 0px;
-    font-size: 35px;
+    font-size: 45px;
     display: inline-flex;
     flex-horizontal-center: 1;
     flex-direction: row;
 }
 
-.next-salah .contine .title {
-    font-size: 35px;
-}
 
 .next-salah .time {
-    font-size: 35px;
-}
-
-.next-salah div {
-    color: greenyellow;
-    font-size: 35px;
-
+    font-size: 45px;
 }
 
 
 .next-salah .alarm {
-    color: red;
+
     font-size: 55px;
-    animation: blinkingText 5s infinite;
+
 }
 
 @keyframes App-logo-spin {

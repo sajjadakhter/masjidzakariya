@@ -11,17 +11,15 @@ body {
 
 
 .next-salah div {
-    font-size: 0.5in;
+    font-size: 0.4in;
     display: inline-flex;
     flex-horizontal-center: 1;
     flex-direction: row;
 }
 
 .next-salah .alarm {
-    color: red;
     font-weight: bold;
     font-size: 50px;
-    animation: blinkingText 5s infinite;
 }
 
 .clock {
@@ -48,6 +46,10 @@ body {
 
 .date-hijri {
     font-size: 0.7in;
+}
+
+.toprow {
+    height: 200px;
 }
 
 .today {
