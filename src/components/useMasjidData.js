@@ -28,7 +28,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
             const info = result.data.masjidInfo;
             setMasjidInfo({name: info.title, shortname: JSON.parse(info.masjid_preferences).short_name});
             const d = result.data.prayerTimes[day - 1];
-            setHijri({month: parseInt(d.hijri_month), day: parseInt(d.hijri_day) - 1, year: 1440, date: d.hijri_date});
+            setHijri({month: parseInt(d.hijri_month), day: parseInt(d.hijri_day), year: 1440, date: d.hijri_date});
             console.log("hijri", hijri);
             setSalahTimes([
                 {
