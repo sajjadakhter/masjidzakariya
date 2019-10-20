@@ -3,10 +3,9 @@ import axios from "axios";
 import moment from "moment";
 
 function convertToDateTime(time, year, month, day) {
-    const fullTime = time + ' ' + year + ':' + month + ':' + day;
-    const mtime = moment(moment(fullTime, "hh:mm a YYYY:MM:DD").toString())
-    return mtime;
-};
+    const fullTime = time + ':00 ' + year + ':' + month + ':' + day;
+    return moment(moment(fullTime, "hh:mm:ss a YYYY:MM:DD").toString());
+}
 
 export const useMasjidData = (hour, day, month, year, masjidId) => {
     const [hijri, setHijri] = useState({});
