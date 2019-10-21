@@ -4,7 +4,7 @@ import moment from "moment";
 
 function convertToDateTime(time, year, month, day) {
     const fullTime = time + ' ' + year + ':' + month + ':' + day;
-    const mtime = moment(moment(fullTime, "hh:mm a YYYY:MM:DD").toString())
+    const mtime = moment(moment(fullTime, "hh:mm a YYYY:MM:DD").seconds(0).toString());
     return mtime;
 };
 
