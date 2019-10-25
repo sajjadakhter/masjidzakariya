@@ -17,21 +17,24 @@ const SalahTimesHorizontal = ({className, showIqamaTitle, salahTimes}) => {
                     }
                     {salahTimes.today.times.map((item, i) => {
                         return <Col
-                            className={i === salahTimes.currentIndex ? 'current' : (i == salahTimes.nextIndex ? 'next' : '')}>
+                            className={salahTimes.salahToDisplay[i].isCurrent ? 'current' : (salahTimes.salahToDisplay[i].isNext ? 'next' : '')}>
                             <div className={'title'}>{item.name}</div>
                             <Moment className={'time'}
                                     format={iqamFormat}>
-                                {item.name === 'Shuruq' ? item.start : item.iqamah}
+                                {salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].iqamah : (
+                                    salahTimes.salahToDisplay[i].isCurrent && !salahTimes.salahToDisplay[i].isIqamah ? salahTimes.tomorrow.times[i].iqamah :
+                                        item.iqamah)}
                             </Moment>
-                            {item.name !== 'Shuruq' &&
+
                             <div className={'info'}>
                                 <Moment format={iqamFormat}>
-                                    {item.start}
+                                    {salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].start : item.start}
                                 </Moment>
                                 <span>-</span>
-                                <Moment format={iqamFormat}>{item.end}</Moment>
+                                <Moment
+                                    format={iqamFormat}>{salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].end : item.end}</Moment>
                             </div>
-                            }
+
                         </Col>
                     })}
                 </Row>

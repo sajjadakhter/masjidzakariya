@@ -11,18 +11,21 @@ const SalahTimesVertical = ({className, showIqamaTitle, salahTimes}) => {
                 <Row> </Row>
                 {salahTimes.today.times.map((item, i) => {
                     return <Row style={{alignContent: 'center'}}
-                                className={i === salahTimes.currentIndex ? 'current' : (i == salahTimes.nextIndex ? 'next' : '')}>
+                                className={salahTimes.salahToDisplay[i].isCurrent ? 'current' : (salahTimes.salahToDisplay[i].isNext ? 'next' : '')}>
                         <Col className={'title'}>{item.name}</Col>
-                        <Col> {item.name !== 'Shuruq' &&
-                        <div className={'info'}>
-                            <Moment format={iqamFormat}>
-                                {item.start}
-                            </Moment>-<Moment format={iqamFormat}>{item.end}</Moment>
-                        </div>
-                        } </Col>
+                        <Col>
+                            <div className={'info'}>
+                                <Moment format={iqamFormat}>
+                                    {salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].start : item.start}
+                                </Moment>-<Moment
+                                format={iqamFormat}>{salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].end : item.end}</Moment>
+                            </div>
+                        </Col>
                         <Col>
                             <Moment format={iqamFormat}>
-                                {item.name === 'Shuruq' ? item.start : item.iqamah}
+                                {salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].iqamah : (
+                                    salahTimes.salahToDisplay[i].isCurrent && !salahTimes.salahToDisplay[i].isIqamah ? salahTimes.tomorrow.times[i].iqamah :
+                                        item.iqamah)}
                             </Moment>
 
                         </Col>
