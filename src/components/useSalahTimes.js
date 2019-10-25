@@ -1,5 +1,5 @@
 import {useMasjidData} from "./useMasjidData";
-import {useNextSalah} from "./useNextSalah";
+import {useNextSalah2} from "./useNextSalah2";
 import useClock from "./useClock";
 
 
@@ -10,7 +10,10 @@ export const useSalahTimes = (masjidId) => {
     //console.log("date get...", day, month, year, tomorrowday, tomorrowmonth, tomorrowyear);
     const [salahTimes, otherTimes, hijri, masjidInfo] = useMasjidData(hour, day, month, year, masjidId);
     const [tsalahTimes, totherTimes] = useMasjidData(hour, tomorrowday, tomorrowmonth, tomorrowyear, masjidId);
-    const [current, next] = useNextSalah(datetiem, salahTimes);
+    const [salahToDisplay, msg, current, next, isProhibted] = useNextSalah2(datetiem, {
+        today: {times: salahTimes},
+        tomorrow: {times: tsalahTimes}
+    }, {mintoishraq: 10, mintozawal: 12});
 
     const salah = {
         today: {
@@ -22,7 +25,10 @@ export const useSalahTimes = (masjidId) => {
             otherTimes: totherTimes,
         },
         currentIndex: current,
-        nextIndex: next
+        nextIndex: next,
+        salahToDisplay: salahToDisplay,
+        msg: msg,
+        isProhibted: isProhibted
     };
 
     const masjid = {

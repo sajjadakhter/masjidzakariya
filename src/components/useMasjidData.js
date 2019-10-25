@@ -58,7 +58,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
                 {
                     name: 'Isha',
                     start: convertToDateTime(d.isha_start_time, year, month, day),
-                    end: convertToDateTime(d.fajr_start_time, year, month, day),
+                    end: convertToDateTime(d.fajr_start_time, year, month, day).add(1, "day"), //fajar tomorrow
                     iqamah: convertToDateTime(info.isha_iqama_time, year, month, day)
                 }
             ]);
