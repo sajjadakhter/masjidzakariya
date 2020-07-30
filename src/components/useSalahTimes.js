@@ -1,16 +1,20 @@
+import React, {useState, useEffect} from 'react';
+
 import {useMasjidData} from "./useMasjidData";
 import {useNextSalah2} from "./useNextSalah2";
 import useClock from "./useClock";
 
 
-export const useSalahTimes = (masjidId) => {
+export const useSalahTimes = (masjidId, timeoffset) => {
 
-    const [datetiem, year, month, day, hour, min, second, tomorrowyear, tomorrowmonth, tomorrowday] = useClock();
+    const [datetimeRaw, year, month, day, hour, min, second, tomorrowyear, tomorrowmonth, tomorrowday] = useClock();
 
     //console.log("date get...", day, month, year, tomorrowday, tomorrowmonth, tomorrowyear);
     const [salahTimes, otherTimes, hijri, masjidInfo] = useMasjidData(hour, day, month, year, masjidId);
     const [tsalahTimes, totherTimes] = useMasjidData(hour, tomorrowday, tomorrowmonth, tomorrowyear, masjidId);
-    const [salahToDisplay, msg, current, next, isProhibted] = useNextSalah2(datetiem, {
+
+
+    const [salahToDisplay, msg, isIqamah, iqamahTime, current, next, isProhibted] = useNextSalah2(datetimeRaw.clone().subtract(timeoffset), {
         today: {times: salahTimes},
         tomorrow: {times: tsalahTimes}
     }, {mintoishraq: 10, mintozawal: 12});
@@ -28,7 +32,9 @@ export const useSalahTimes = (masjidId) => {
         nextIndex: next,
         salahToDisplay: salahToDisplay,
         msg: msg,
-        isProhibted: isProhibted
+        isProhibted: isProhibted,
+        isIqamah: isIqamah,
+        iqamahTime: iqamahTime
     };
 
     const masjid = {
@@ -39,7 +45,9 @@ export const useSalahTimes = (masjidId) => {
     const datetime = {
         hijri: hijri,
         now: {
-            raw: datetiem,
+            raw: datetimeRaw,
+            timeoffset: timeoffset,
+            adjusted: datetimeRaw.clone().subtract(timeoffset),
             year: year,
             month: month,
             day: day,

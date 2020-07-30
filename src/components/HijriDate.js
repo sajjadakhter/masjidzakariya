@@ -6,12 +6,14 @@ function hijriToString(day, month, year) {
     return ordinal(day) + " " + months[month - 1];
 }
 
-const HijriDate = ({day, month, year}) => {
+const HijriDate = ({dayplus, day, month, year}) => {
 
     if (day === undefined) return null;
+
     return (
         <div>
-            {hijriToString(day, month, year)}
+            {(dayplus ? '*' : '') + hijriToString(day + (dayplus ? 1 : 0), month, year)}
+            <div style={{fontSize: '35%', color: 'pink'}}>*Islamic date changes at maghrib time</div>
         </div>
     );
 

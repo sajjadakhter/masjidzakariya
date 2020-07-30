@@ -6,7 +6,7 @@ async function sleep(ms) {
 }
 
 function useClock(props) {
-    const [datetime, setdatetime] = useState(0);
+    const [datetime, setdatetime] = useState(moment());
     const [year, setyear] = useState(0);
     const [month, setmonth] = useState(0);
     const [day, setday] = useState(0);

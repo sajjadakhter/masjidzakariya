@@ -2,8 +2,10 @@ import {Col, Row} from "react-bootstrap";
 import Moment from "react-moment";
 import React from "react";
 
+
 const SalahTimesVertical = ({className, showIqamaTitle, salahTimes}) => {
     const iqamFormat = "h:mm";
+
     return (
         <Row className={className}>
             <Col sm={1}/>
@@ -27,7 +29,6 @@ const SalahTimesVertical = ({className, showIqamaTitle, salahTimes}) => {
                                     salahTimes.salahToDisplay[i].isCurrent && !salahTimes.salahToDisplay[i].isIqamah ? salahTimes.tomorrow.times[i].iqamah :
                                         item.iqamah)}
                             </Moment>
-
                         </Col>
                     </Row>
                 })}

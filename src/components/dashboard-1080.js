@@ -1,21 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
+import Popout from 'react-popout'
+import moment from 'moment';
+import {useQueryParam, NumberParam, BooleanParam} from "use-query-params";
+
 import './dashboard.css'
 import './dashboard-1080.css';
+
 import SalahTimesVertical from "./SalahTimesVertical"
 import CurrentTimeDisplay from "./CurrentTimeDisplay";
 import NextSalahDisplay from "./nextSalahDisplay";
 import CurrentDateDisplay from "./CurrentDateDisplay";
-import {useQueryParams, NumberParam} from "use-query-params";
+
 import {useSalahTimes} from "./useSalahTimes";
+import DebugDuration from "./debugDuration"
 
 function Dashboard1920() {
-
-    const [query, setQuery] = useQueryParams({masjidid: NumberParam});
-    const [salah, datetime, masjid] = useSalahTimes(query.masjidid);
+    const [time, setTime] = useState(moment.duration(0, "hours"));
+    const [masjidid, setMasjidId] = useQueryParam('masjidid', NumberParam);
+    const [salah, datetime, masjid] = useSalahTimes(masjidid, time);
 
     return (
         <div className="App">
+            <DebugDuration callback={setTime} datetime={datetime}/>
             <Container fluid>
                 <Row>
                     <Col className={'masjid-name'}>

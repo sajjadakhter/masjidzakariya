@@ -19,7 +19,7 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
             console.log("ignoring as invlad date/time");
             return
         }
-        const iqamahUrl = '/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
+        const iqamahUrl = 'https://ummahsoft.org/salahtime/api/masjidi/v1/index.php/masjids/' + masjidId + '/iqamahandprayertimes/' + year + '/' + month;
 
         console.log('getting data ----------------');
         axios.get(iqamahUrl).then((result) => {
@@ -28,7 +28,13 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
             const info = result.data.masjidInfo;
             setMasjidInfo({name: info.title, shortname: JSON.parse(info.masjid_preferences).short_name});
             const d = result.data.prayerTimes[day - 1];
-            setHijri({month: parseInt(d.hijri_month), day: parseInt(d.hijri_day), year: 1440, date: d.hijri_date});
+            setHijri({
+                month: parseInt(d.hijri_month),
+                day: parseInt(d.hijri_day),
+                year: 1440,
+                date: d.hijri_date - 1,
+                dateChangeTime: convertToDateTime(d.magrib_start_time, year, month, day),
+            });
             console.log("hijri", hijri);
             setSalahTimes([
                 {

@@ -5,6 +5,8 @@ export const useNextSalah2 = (currentTime, salahTimes, config) => {
         const [next, setNext] = useState(-1);
         const [current, setCurrent] = useState(-1);
         const [isProhibted, setisProhibted] = useState(false);
+        const [isIqamah, setIsIqamah] = useState(false);
+        const [iqamahTime, setIqamahTime] = useState();
         const [salahToDisplay, setSalahToDisplay] = useState([
             {showTomorrow: false, isIqamah: false, isIqamahChanging: false, isCurrent: false, isNext: false},
             {showTomorrow: false, isIqamah: false, isIqamahChanging: false, isCurrent: false, isNext: false},
@@ -51,12 +53,13 @@ export const useNextSalah2 = (currentTime, salahTimes, config) => {
         };
 
         const UpdatreSalahTimesToShow = () => {
-            console.log(salahTimes);
+            //
             //pick salah times to display
             //if iqama is over + config.waitforsalah (8min)
             //Show tomorrow's iqama
             //if tomorrow's iqama is changing flash it (except magrib)
             //once salah time is ended and time is after tomorrow's salah end then show tomorrow's salah star,end
+            let isIqamah = false;
             if (salahTimes.today.times.length < 4 || salahTimes.tomorrow.times.length < 4) {
                 return;
             }
@@ -74,6 +77,7 @@ export const useNextSalah2 = (currentTime, salahTimes, config) => {
                 foundNext = true;
                 salahToDisplay[0].isNext = true;
                 salahToDisplay[4].isCurrent = true;
+                setIqamahTime(salahTimes.today.times[0].iqamah)
 
             }
             for (i = 0; i < salahTimes.today.times.length; i++) {
@@ -82,6 +86,9 @@ export const useNextSalah2 = (currentTime, salahTimes, config) => {
                 salahToDisplay[i].isIqamahChanging = (minutesOfDay(currSallah.iqamah) !== minutesOfDay(salahTimes.tomorrow.times[i].iqamah));
                 if (!foundCurrent) {
                     salahToDisplay[i].isCurrent = (currentTime >= currSallah.start && currentTime < currSallah.end);
+                    if (salahToDisplay[i].isCurrent) {
+                        setIqamahTime(salahTimes.today.times[i].iqamah)
+                    }
                 }
 
                 if (!foundNext && currentTime < currSallah.start) {
@@ -91,12 +98,16 @@ export const useNextSalah2 = (currentTime, salahTimes, config) => {
 
                 salahToDisplay[i].showTomorrow = (currentTime > currSallah.end);
                 salahToDisplay[i].isIqamah = (currentTime >= currSallah.start && currentTime < currSallah.iqamah);
+                if (salahToDisplay[i].isIqamah) {
+                    isIqamah = true;
+                }
             }
 
             if (salahToDisplay[4].isCurrent) { //if current is isha then fajar is next
                 salahToDisplay[0].isNext = true;
             }
 
+            setIsIqamah(isIqamah);
             setSalahToDisplay(salahToDisplay);
         };
 
@@ -137,6 +148,6 @@ export const useNextSalah2 = (currentTime, salahTimes, config) => {
             //   console.log({currIndex: currIndex, nextIndex: nextIndex, currentTime: currentTime.toString()})
         }, [salahTimes, currentTime]);
 
-        return [salahToDisplay, msg, current, next, isProhibted];
+        return [salahToDisplay, msg, isIqamah, iqamahTime, current, next, isProhibted];
     }
 ;

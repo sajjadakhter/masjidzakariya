@@ -9,7 +9,7 @@ const App = () => {
     useEffect(() => {
         console.log('screen size', window.innerWidth)
     }, [])
-    console.log({dir: query.dir});
+    //   console.log({dir: query.dir});
     if (query.dir === 'v') {
         return require("./components/dashboard-1080").default();
     }
