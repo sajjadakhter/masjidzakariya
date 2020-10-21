@@ -41,31 +41,36 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
                     name: 'Fajr',
                     start: convertToDateTime(d.fajr_start_time, year, month, day),
                     end: convertToDateTime(d.shuruq, year, month, day),
-                    iqamah: convertToDateTime(info.fajr_iqama_time, year, month, day)
+                    iqamah: convertToDateTime(info.fajr_iqama_time, year, month, day),
+                    noiqamah: masjidId == 51786
                 },
                 {
                     name: 'Zuhr',
                     start: convertToDateTime(d.zuhr_start_time, year, month, day),
                     end: convertToDateTime(d.asr_start_time, year, month, day),
-                    iqamah: convertToDateTime(info.zuhr_iqama_time, year, month, day)
+                    iqamah: masjidId == 51786 ? convertToDateTime("2:00 pm", year, month, day) : convertToDateTime(info.zuhr_iqama_time, year, month, day),
+                    noiqamah: false
                 },
                 {
                     name: 'Asr',
                     start: convertToDateTime(d.asr_start_time, year, month, day),
                     end: convertToDateTime(d.magrib_start_time, year, month, day),
-                    iqamah: convertToDateTime(info.asr_iqama_time, year, month, day)
+                    iqamah: convertToDateTime(info.asr_iqama_time, year, month, day),
+                    noiqamah: masjidId == 51786
                 },
                 {
                     name: 'Magrib',
                     start: convertToDateTime(d.magrib_start_time, year, month, day),
                     end: convertToDateTime(d.isha_start_time, year, month, day),
-                    iqamah: convertToDateTime(d.magrib_start_time, year, month, day)
+                    iqamah: convertToDateTime(d.magrib_start_time, year, month, day),
+                    noiqamah: masjidId == 51786
                 },
                 {
                     name: 'Isha',
                     start: convertToDateTime(d.isha_start_time, year, month, day),
                     end: convertToDateTime(d.fajr_start_time, year, month, day).add(1, "day"), //fajar tomorrow
-                    iqamah: convertToDateTime(info.isha_iqama_time, year, month, day)
+                    iqamah: convertToDateTime(info.isha_iqama_time, year, month, day),
+                    noiqamah: masjidId == 51786
                 }
             ]);
             setOtherTimes(
@@ -77,7 +82,8 @@ export const useMasjidData = (hour, day, month, year, masjidId) => {
                     name: 'Jumua',
                     start: convertToDateTime(d.zuhr_start_time, year, month, day),
                     end: convertToDateTime(d.asr_start_time, year, month, day),
-                    iqamah: convertToDateTime(info.jumma1_iqama, year, month, day)
+                    iqamah: convertToDateTime(info.jumma1_iqama, year, month, day),
+                    noiqamah: false
                 }
             );
         }).catch((error) => {
