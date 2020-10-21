@@ -13,7 +13,7 @@ const HijriDate = ({dayplus, day, month, year}) => {
     return (
         <div>
             {(dayplus ? '*' : '') + hijriToString(day + (dayplus ? 1 : 0), month, year)}
-            <div style={{fontSize: '35%', color: 'pink'}}>*Islamic date changes at maghrib time</div>
+            <div style={{fontSize: '40%', color: 'pink'}}>*Islamic date changes at magrib time</div>
         </div>
     );
 

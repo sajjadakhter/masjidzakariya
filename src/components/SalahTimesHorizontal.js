@@ -19,12 +19,16 @@ const SalahTimesHorizontal = ({className, showIqamaTitle, salahTimes}) => {
                         return <Col
                             className={salahTimes.salahToDisplay[i].isCurrent ? 'current' : (salahTimes.salahToDisplay[i].isNext ? 'next' : '')}>
                             <div className={'title'}>{item.name}</div>
-                            <Moment className={'time'}
-                                    format={iqamFormat}>
-                                {salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].iqamah : (
-                                    salahTimes.salahToDisplay[i].isCurrent && !salahTimes.salahToDisplay[i].isIqamah ? salahTimes.tomorrow.times[i].iqamah :
-                                        item.iqamah)}
-                            </Moment>
+                            {salahTimes.today.times[i].noiqamah ?
+                                <time className={'time'} style={{fontSize: "60%"}}> no Iqamah</time>
+                                :
+                                <Moment className={'time'}
+                                        format={iqamFormat}>
+                                    {salahTimes.salahToDisplay[i].showTomorrow ? salahTimes.tomorrow.times[i].iqamah : (
+                                        salahTimes.salahToDisplay[i].isCurrent && !salahTimes.salahToDisplay[i].isIqamah ? salahTimes.tomorrow.times[i].iqamah :
+                                            item.iqamah)}
+                                </Moment>
+                            }
 
                             <div className={'info'}>
                                 <Moment format={iqamFormat}>
