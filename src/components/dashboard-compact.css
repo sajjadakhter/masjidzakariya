@@ -1,0 +1,156 @@
+body {
+    background: black;
+}
+
+.compact-dashboard {
+    --compact-scale: 0.624;
+    --compact-h-padding: 15px;
+    width: 1198px;
+    max-width: 100vw;
+    height: 379px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.compact-dashboard .container-fluid {
+    padding-left: var(--compact-h-padding);
+    padding-right: var(--compact-h-padding);
+}
+
+.compact-dashboard .masjid-name {
+    padding-top: calc(10px * var(--compact-scale));
+    font-size: calc(0.25in * var(--compact-scale));
+}
+
+.compact-dashboard .next-salah div {
+    font-size: calc(0.4in * var(--compact-scale));
+    display: inline-flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.compact-dashboard .next-salah .alarm {
+    font-weight: bold;
+    font-size: calc(50px * var(--compact-scale));
+}
+
+.compact-dashboard .clock {
+    position: absolute;
+    right: var(--compact-h-padding);
+    top: calc(-30px * var(--compact-scale));
+}
+
+.compact-dashboard .clock .time {
+    letter-spacing: calc(10px * var(--compact-scale));
+    font-size: calc(3in * var(--compact-scale));
+    display: inline-flex;
+}
+
+.compact-dashboard .clock .time .ampm {
+    font-size: calc(0.5in * var(--compact-scale));
+    margin-top: calc(2.7in * var(--compact-scale));
+    width: calc(150px * var(--compact-scale));
+}
+
+.compact-dashboard .date {
+    font-size: calc(0.5in * var(--compact-scale));
+}
+
+.compact-dashboard .date-hijri {
+    font-size: calc(0.6in * var(--compact-scale));
+}
+
+.compact-dashboard .toprow {
+    height: calc(200px * var(--compact-scale));
+}
+
+.compact-dashboard .compact-top-meta {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.compact-dashboard .compact-meta-left {
+    width: 50%;
+    max-width: 50%;
+    padding-left: 0;
+    margin-left: 0;
+    text-align: left;
+}
+
+.compact-dashboard .compact-meta-left .date,
+.compact-dashboard .compact-meta-left .date-hijri,
+.compact-dashboard .compact-meta-left .next-salah {
+    text-align: left;
+}
+
+.compact-dashboard .today {
+    margin-top: calc(56px * var(--compact-scale));
+    font-size: calc(0.5in * var(--compact-scale));
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Hide the left spacer column and control the content width */
+.compact-dashboard .today > *:first-child {
+    display: none;
+}
+
+.compact-dashboard .today > *:nth-child(2) {
+    max-width: 100%;
+    flex: 0 0 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.compact-dashboard .today .iqama {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.compact-dashboard .today .iqama > * {
+    padding-left: calc(15px / 5) !important;
+    padding-right: calc(15px / 5) !important;
+}
+
+.compact-dashboard .today .iqama > *:first-child {
+    padding-left: 0 !important;
+}
+
+.compact-dashboard .today .iqama > *:last-child {
+    padding-right: 0 !important;
+}
+
+.compact-dashboard .today .title {
+    font-size: calc(0.5in * var(--compact-scale));
+    margin-top: calc(12px * var(--compact-scale));
+}
+
+.compact-dashboard .today time {
+    font-size: calc(0.9in * var(--compact-scale));
+    margin-top: calc(12px * var(--compact-scale));
+}
+
+.compact-dashboard .today .iqama .info time {
+    font-size: 80%;
+    color: grey;
+}
+
+.compact-dashboard .today .current .info time {
+    color: yellow;
+}
+
+.compact-dashboard .today .col {
+    border: #1b1e21 calc(7px * var(--compact-scale)) solid;
+    border-radius: calc(15px * var(--compact-scale));
+}
+
+.compact-dashboard .today .friday {
+    border-right: black calc(7px * var(--compact-scale)) solid;
+}

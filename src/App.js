@@ -5,13 +5,21 @@ import {useQueryParams, StringParam} from "use-query-params";
 
 
 const App = () => {
-    const [query, setQuery] = useQueryParams({dir: StringParam});
+    const [query] = useQueryParams({dir: StringParam});
     useEffect(() => {
         console.log('screen size', window.innerWidth)
     }, [])
     //   console.log({dir: query.dir});
     if (query.dir === 'v') {
         return require("./components/dashboard-1080").default();
+    }
+
+    if (query.dir === 'n') {
+        return require("./components/dashboard-2-1920").default();
+    }
+
+    if (query.dir === 'compact') {
+        return require("./components/dashboard-compact").default();
     }
     // if (window.innerWidth >= 1920) {
     return require("./components/dashboard-1920").default();
